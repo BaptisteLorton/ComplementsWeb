@@ -2,8 +2,10 @@ import { defineStore } from 'pinia'
 import * as OrganisationService from '@/service/org.service'
 import * as TeamService from "@/service/team.service";
 import * as HeroService from "@/service/hero.service";
+import { useErrorStore } from './error'
 
 export const useGestionStore = defineStore({
+    id: 'gestion',
     state: () => ({
         mdpOrganisation: null,
         currentHero: null,
@@ -44,7 +46,7 @@ export const useGestionStore = defineStore({
             if (response.error === 0) {
                 this.updateCurrentOrganisation(response.data[0])
             } else {
-                this.errors.pushError(response.data)
+                useErrorStore().pushError(response.data)
             }
         },
         async getOrganisations() {

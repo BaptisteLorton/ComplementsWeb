@@ -1,9 +1,15 @@
 <template>
   <ion-app>
-    <ion-router-outlet />
+    <ion-header>
+      <Navbar/>
+    </ion-header>
+    <ion-content>
+      <router-view/>
+    </ion-content>
   </ion-app>
 </template>
 
 <script setup lang="ts">
-import { IonApp, IonRouterOutlet } from '@ionic/vue';
+import { IonApp } from '@ionic/vue';
+import Navbar from './components/Navbar.vue';
 </script>
