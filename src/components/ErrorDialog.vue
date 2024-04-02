@@ -1,36 +1,20 @@
 <template>
-  <ion-modal :is-open="isError">
-    <ion-content class="ion-padding">
-      <div class="ion-text-center">
-        <h2>{{ title }}</h2>
-        <p>{{ errorMsg }}</p>
-        <ion-button color="primary" @click="popError">Ok</ion-button>
-      </div>
-    </ion-content>
-  </ion-modal>
+  <ion-alert
+      :is-open="isError"
+      :message="errorMsg.toString()"
+      :buttons="['OK']"
+      @ionAlertDidDismiss="popError"
+  ></ion-alert>
 </template>
 
-<script>
-import { ref } from 'vue';
+<script lang="ts" setup>
+import { computed } from 'vue';
+import { useErrorStore } from '@/store/error.js';
+import {IonAlert} from "@ionic/vue";
 
-export default {
-  name: 'ErrorDialog',
-  props: {
-    title: String,
-  },
-  setup() {
-    const isError = ref(false);
-    const errorMsg = ref('');
+const errorStore = useErrorStore();
 
-    const popError = () => {
-      isError.value = false;
-    }
-
-    return {
-      isError,
-      errorMsg,
-      popError,
-    }
-  }
-};
+let isError = computed(() => errorStore.isError);
+let errorMsg = computed(() => errorStore.errorMsg);
+let popError = errorStore.popError;
 </script>

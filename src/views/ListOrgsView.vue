@@ -29,12 +29,6 @@
           ]"
           width="600">
       </PromiseDialog>
-
-      <ErrorDialog
-          title="ERROR"
-          width="600"
-      >
-      </ErrorDialog>
     </ion-content>
   </div>
 </template>
